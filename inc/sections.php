@@ -153,6 +153,43 @@ function edgeexpo_cta(?array $copy = null): string
 }
 
 /**
+ * "Featured project" row on a service page: a large photo of a real Edge Expos project
+ * from that service, with a link to the project. Photos come from the Wayback Machine.
+ *
+ * @param string $key Service key from edgeexpo_page_content().
+ */
+function edgeexpo_feature(string $key): string
+{
+    $map = array(
+        'custom'    => array('hurco', 'portfolio-hurco.webp', 'Hurco South Africa', 'A custom exhibition stand with a floating branded canopy, LED lighting and live machinery on display.'),
+        'modular'   => array('fairtrade', 'portfolio-fairtrade.webp', 'Fairtrade Tourism', 'A double storey stand combining modular and custom elements, designed to travel between WTM Africa in Cape Town and Tourism Indaba in Durban.'),
+        'system'    => array('dosco-precision-hydraulics', 'feature-dosco-precision-hydraulics.webp', 'Dosco Precision Hydraulics', 'A well lit, structurally stable corner stand at BAUMA Africa, built to display extremely heavy hydraulic pumps.'),
+        'pos'       => array('barclays', 'feature-barclays.webp', 'Barclays', 'Custom designed point of sale: The Maze Game, with a CNC cut maze, duco spray finish and a weighted powder coated steel base.'),
+        'shop'      => array('russell-athletic', 'feature-russell-athletic.webp', 'Russell Athletic', 'Custom shopfitting for a retail outlet in a local gym.'),
+        'container' => array('mms-mobile-cranes', 'feature-mms-mobile-cranes.webp', 'MMS Mobile Cranes', 'A hydraulic container stand for BAUMA Africa that locks up every evening at the push of a button, with a Bedouin tent entertainment area and custom towers.'),
+    );
+    if (empty($map[$key])) {
+        return '';
+    }
+    [$slug, $img, $name, $text] = $map[$key];
+    $url = home_url('/portfolio-items/' . $slug . '/');
+
+    $media = edgeexpo_block_image('ee-feature__image', edgeexpo_img($img), $name . ' by Edge Expos');
+    $info  = edgeexpo_block_p('ee-feature__kicker', esc_html__('Featured project', 'edgeexpo'))
+        . edgeexpo_block_h(3, 'ee-feature__title', esc_html($name))
+        . edgeexpo_block_p('ee-feature__text', esc_html($text))
+        . edgeexpo_block_buttons('ee-feature__buttons', array(array(__('View project', 'edgeexpo'), $url)));
+
+    $columns = sprintf(
+        "<!-- wp:columns {\"verticalAlignment\":\"center\",\"className\":\"ee-feature\"} -->\n<div class=\"wp-block-columns are-vertically-aligned-center ee-feature\"><!-- wp:column {\"verticalAlignment\":\"center\",\"width\":\"55%%\"} -->\n<div class=\"wp-block-column is-vertically-aligned-center\" style=\"flex-basis:55%%\">%s</div>\n<!-- /wp:column -->\n\n<!-- wp:column {\"verticalAlignment\":\"center\",\"width\":\"45%%\"} -->\n<div class=\"wp-block-column is-vertically-aligned-center\" style=\"flex-basis:45%%\">%s</div>\n<!-- /wp:column --></div>\n<!-- /wp:columns -->",
+        $media,
+        $info
+    );
+
+    return edgeexpo_block_section('ee-feature-section', $columns);
+}
+
+/**
  * Full block markup for one service-style page.
  *
  * @param string $key Key from edgeexpo_page_content().
@@ -175,6 +212,7 @@ function edgeexpo_service_page(string $key): string
             $out .= edgeexpo_block_section('ee-button-row', edgeexpo_block_p('ee-placeholder', esc_html__('[PLACEHOLDER] The catalogue PDF was not saved by the Wayback Machine. Upload it to the Media Library and link this button to it.', 'edgeexpo')));
         }
     }
+    $out .= edgeexpo_feature($key);
     $out .= edgeexpo_portfolio_strip();
     $out .= edgeexpo_cta($c['cta']);
 

@@ -791,3 +791,52 @@ button:focus-visible {
 .ee-noimg a:hover {
 	color: var(--ee-lime);
 }
+
+
+/* ---------- Featured project (service pages) ---------- */
+
+.ee-feature-section {
+	padding-block: 10px 50px;
+}
+
+.ee-feature.wp-block-columns {
+	gap: 50px;
+	margin: 0;
+}
+
+.ee-feature__image {
+	margin: 0;
+}
+
+.ee-feature__image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	background: #fff;
+}
+
+.ee-feature__kicker {
+	margin: 0 0 6px;
+	color: var(--wp--preset--color--lime);
+	font-family: var(--wp--preset--font-family--pt-sans);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.ee-feature__title {
+	margin: 0 0 14px;
+}
+
+.ee-feature__text {
+	margin: 0 0 22px;
+}
+
+@media (max-width: 781px) {
+	.ee-feature.wp-block-columns {
+		gap: 24px;
+	}
+}
