@@ -1,0 +1,27 @@
+<!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","className":"ee-main","layout":{"type":"default"}} -->
+<main class="wp-block-group alignfull ee-main"><!-- wp:pattern {"slug":"edgeexpo/portfolio-title-bar"} /-->
+
+<!-- wp:group {"tagName":"section","align":"full","className":"ee-section ee-listing","layout":{"type":"default"}} -->
+<section class="wp-block-group alignfull ee-section ee-listing"><!-- wp:group {"className":"ee-container","layout":{"type":"default"}} -->
+<div class="wp-block-group ee-container"><!-- wp:query {"queryId":30,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"className":"ee-cards"} -->
+<div class="wp-block-query ee-cards"><!-- wp:post-template {"className":"ee-cards__grid","layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"1","className":"ee-card__image"} /-->
+
+<!-- wp:post-title {"level":3,"isLink":true,"className":"ee-card__title"} /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"className":"ee-pagination","layout":{"type":"flex","justifyContent":"center"}} -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group --></section>
+<!-- /wp:group --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer","tagName":"footer"} /-->

@@ -1,0 +1,14 @@
+/*
+ * Editor-only adjustments. frontend.css is also loaded in the editor, so this file only
+ * covers differences between the canvas and the live site.
+ */
+
+/* Show the empty gallery placeholder at a sensible size on new projects. */
+.editor-styles-wrapper .ee-project__media .wp-block-gallery:not(.has-nested-images) {
+	min-height: 200px;
+}
+
+/* Keep the portfolio strip readable while its query previews load. */
+.editor-styles-wrapper .ee-works__grid .wp-block-post-featured-image {
+	min-height: 80px;
+}
