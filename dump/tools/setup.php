@@ -106,8 +106,19 @@ if (in_array($step, array('all', 'portfolio'), true)) {
             return $found[0];
         }
         $bytes = '';
-        $resp  = wp_remote_get($wayback . $remote, array('timeout' => 40));
-        if (! is_wp_error($resp) && 200 === wp_remote_retrieve_response_code($resp) && str_starts_with((string) wp_remote_retrieve_header($resp, 'content-type'), 'image/')) {
+        // Prefer a copy already fetched by wayback.php (dump/wayback/files/).
+        $local = dirname(__DIR__) . '/wayback/files/' . $remote;
+        if (is_readable($local) && filesize($local) > 0) {
+            $bytes = (string) file_get_contents($local);
+            $file  = $name . '.' . pathinfo($remote, PATHINFO_EXTENSION);
+            echo "  local copy {$remote} (" . strlen($bytes) . " bytes)\n";
+            $resp = null;
+        } else {
+            $resp = wp_remote_get($wayback . $remote, array('timeout' => 40));
+        }
+        if ('' !== $bytes) {
+            // Already loaded from the local copy.
+        } elseif (! is_wp_error($resp) && 200 === wp_remote_retrieve_response_code($resp) && str_starts_with((string) wp_remote_retrieve_header($resp, 'content-type'), 'image/')) {
             $bytes = wp_remote_retrieve_body($resp);
             $file  = $name . '.' . pathinfo($remote, PATHINFO_EXTENSION);
             echo "  downloaded {$remote} (" . strlen($bytes) . " bytes)\n";
@@ -154,6 +165,13 @@ if (in_array($step, array('all', 'portfolio'), true)) {
                 $images[] = $id;
             }
         }
+        // Other archived pictures of the same project (e.g. a stand render used on the old home slider).
+        foreach ($project['found'] ?? array() as $extra) {
+            $id = $import($extra, null, $project['title']);
+            if ($id) {
+                $images[] = $id;
+            }
+        }
 
         $gallery_inner = '';
         foreach ($images as $img) {
@@ -163,7 +181,7 @@ if (in_array($step, array('all', 'portfolio'), true)) {
         }
         $gallery = "<!-- wp:gallery {\"columns\":1,\"linkTo\":\"none\",\"sizeSlug\":\"large\",\"className\":\"is-style-ee-stacked\"} -->\n<figure class=\"wp-block-gallery has-nested-images columns-1 is-cropped is-style-ee-stacked\">{$gallery_inner}</figure>\n<!-- /wp:gallery -->";
 
-        $missing = count($project['images']) - count($images);
+        $missing = count($project['images']) - count($images) + count($project['found'] ?? array());
         $note    = '';
         if (! $images) {
             $note = $p('[PLACEHOLDER] Project photos were not saved by the Wayback Machine. Edge Expos to supply photos for this project.', 'ee-placeholder');
@@ -175,6 +193,9 @@ if (in_array($step, array('all', 'portfolio'), true)) {
             . "<!-- wp:heading {\"className\":\"ee-project__event\"} -->\n<h2 class=\"wp-block-heading ee-project__event\">" . esc_html($project['event']) . "</h2>\n<!-- /wp:heading -->\n\n";
         foreach ($project['body'] as $para) {
             $info .= $p(esc_html($para)) . "\n\n";
+        }
+        if (! $project['body']) {
+            $info .= $p('[PLACEHOLDER] The project description was not saved on the old site. Edge Expos to supply.', 'ee-placeholder') . "\n\n";
         }
         $info .= "<!-- wp:heading {\"level\":4,\"className\":\"ee-project__feature-title\"} -->\n<h4 class=\"wp-block-heading ee-project__feature-title\">Project Feature:</h4>\n<!-- /wp:heading -->\n\n" . $list($project['features']);
         if (! empty($project['extra'])) {

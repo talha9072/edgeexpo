@@ -107,7 +107,10 @@
    "modular"
   ],
   "date": "2015-11-25 09:00:00",
-  "placeholder": false
+  "placeholder": false,
+  "found": [
+   "2015/09/cutting-edgetest.png"
+  ]
  },
  {
   "slug": "hagglunds",
@@ -320,6 +323,48 @@
    "exhibition-stands"
   ],
   "date": "2024-12-19 09:00:00",
+  "placeholder": true
+ },
+ {
+  "slug": "bbf-safety-group",
+  "title": "BBF Safety Group",
+  "event": "[PLACEHOLDER – event and venue]",
+  "body": [],
+  "features": [
+   "Custom Exhibition Stand",
+   "[PLACEHOLDER] Add the other project features"
+  ],
+  "extra": null,
+  "images": [],
+  "found": [
+   "2017/09/homeslide-001.png"
+  ],
+  "thumb": null,
+  "categories": [
+   "custom"
+  ],
+  "date": "2017-09-01 09:00:00",
+  "placeholder": true
+ },
+ {
+  "slug": "hurco",
+  "title": "Hurco South Africa",
+  "event": "[PLACEHOLDER – event and venue]",
+  "body": [],
+  "features": [
+   "Custom Exhibition Stand",
+   "[PLACEHOLDER] Add the other project features"
+  ],
+  "extra": null,
+  "images": [],
+  "found": [
+   "2017/09/homeslide-002.png"
+  ],
+  "thumb": null,
+  "categories": [
+   "custom"
+  ],
+  "date": "2017-09-02 09:00:00",
   "placeholder": true
  }
 ]

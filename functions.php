@@ -219,7 +219,7 @@ add_filter('render_block_core/navigation-submenu', 'edgeexpo_nav_current', 10, 2
  */
 function edgeexpo_front_title(string $title): string
 {
-    return is_front_page() ? 'Exhibition Stands - Edge Expos - exhibition, stand, design' : $title;
+    return is_front_page() ? 'Exhibition Stands - Edge Expos - exhibition , stand , design' : $title;
 }
 add_filter('pre_get_document_title', 'edgeexpo_front_title');
 
@@ -228,6 +228,6 @@ function edgeexpo_front_description(): void
     if (! is_front_page() || defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
         return;
     }
-    echo '<meta name="description" content="' . esc_attr__('Edge Expos design and build custom, modular and system exhibition stands, point of sale, shop fitting and container conversions, with workshops in Johannesburg, Cape Town and Durban.', 'edgeexpo') . '">' . "\n";
+    echo '<meta name="description" content="' . esc_attr__('Cutting edge exhibition industry is increasingly being credited as a cutting-edge marketing tool. It is the only form of below the line marketing and design', 'edgeexpo') . '">' . "\n";
 }
 add_action('wp_head', 'edgeexpo_front_description', 2);

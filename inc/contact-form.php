@@ -107,7 +107,7 @@ function edgeexpo_handle_contact_form(): void
         $data['company'] ?: '-',
         $data['message']
     );
-    $headers = array('Reply-To: ' . $data['name'] . ' <' . $data['email'] . '>');
+    $headers = array('Reply-To: "' . str_replace(array('"', '\\', '<', '>'), '', $data['name']) . '" <' . $data['email'] . '>');
 
     if (! wp_mail($to, $subject, $body, $headers)) {
         wp_safe_redirect(add_query_arg('contact', 'failed', $back) . '#contact-form');

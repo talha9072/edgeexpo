@@ -171,6 +171,9 @@ function edgeexpo_service_page(string $key): string
     }
     if ($c['button']) {
         $out .= edgeexpo_button_row($c['button'][0], $c['button'][1]);
+        if (str_starts_with($c['button'][1], '#')) {
+            $out .= edgeexpo_block_section('ee-button-row', edgeexpo_block_p('ee-placeholder', esc_html__('[PLACEHOLDER] The catalogue PDF was not saved by the Wayback Machine. Upload it to the Media Library and link this button to it.', 'edgeexpo')));
+        }
     }
     $out .= edgeexpo_portfolio_strip();
     $out .= edgeexpo_cta($c['cta']);

@@ -1,7 +1,11 @@
 <!-- wp:template-part {"slug":"header","area":"header","tagName":"header"} /-->
 
 <!-- wp:group {"tagName":"main","align":"full","className":"ee-main","layout":{"type":"default"}} -->
-<main class="wp-block-group alignfull ee-main"><!-- wp:pattern {"slug":"edgeexpo/portfolio-title-bar"} /-->
+<main class="wp-block-group alignfull ee-main"><!-- wp:group {"align":"full","className":"ee-titlebar","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull ee-titlebar"><!-- wp:group {"className":"ee-container ee-titlebar__inner","layout":{"type":"default"}} -->
+<div class="wp-block-group ee-container ee-titlebar__inner"><!-- wp:query-title {"type":"archive","showPrefix":false,"className":"ee-titlebar__title"} /--></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
 
 <!-- wp:group {"tagName":"section","align":"full","className":"ee-section ee-listing","layout":{"type":"default"}} -->
 <section class="wp-block-group alignfull ee-section ee-listing"><!-- wp:group {"className":"ee-container","layout":{"type":"default"}} -->
