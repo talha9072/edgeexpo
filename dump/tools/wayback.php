@@ -77,3 +77,20 @@ if ('fetch' === $step) {
     }
     echo 'done ', $from, '-', $from + count($keys), ' of ', count($found), "\n";
 }
+
+// ?step=one&ts=20180110234844&url=http://www.edgeexpo.co.za/wp-content/uploads/2017/09/header_2017.png
+if ('one' === $step) {
+    $ts   = preg_replace('/\D/', '', (string) ($_GET['ts'] ?? ''));
+    $orig = esc_url_raw(wp_unslash((string) ($_GET['url'] ?? '')));
+    $path = rawurldecode(preg_replace('#^.*?/wp-content/uploads/#', '', $orig));
+    $dest = $dir . '/files/' . $path;
+    wp_mkdir_p(dirname($dest));
+    $resp = wp_remote_get('https://web.archive.org/web/' . $ts . 'id_/' . $orig, array('timeout' => 60));
+    if (! is_wp_error($resp) && 200 === wp_remote_retrieve_response_code($resp)) {
+        file_put_contents($dest, wp_remote_retrieve_body($resp));
+        $size = @getimagesize($dest);
+        echo "ok {$path} ", filesize($dest), ' bytes ', $size ? $size[0] . 'x' . $size[1] : '?', "\n";
+    } else {
+        echo "FAIL\n";
+    }
+}

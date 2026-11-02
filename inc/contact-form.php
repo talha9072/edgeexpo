@@ -97,7 +97,9 @@ function edgeexpo_handle_contact_form(): void
         exit;
     }
 
-    $to      = apply_filters('edgeexpo_contact_recipients', edgeexpo_contact()['emails']);
+    // Appearance → Edge Expos Setup can send enquiries to one test address instead.
+    $test    = sanitize_email((string) get_option('edgeexpo_contact_test_email', ''));
+    $to      = apply_filters('edgeexpo_contact_recipients', $test ? array($test) : edgeexpo_contact()['emails']);
     /* translators: %s: sender's name */
     $subject = sprintf(__('New website enquiry from %s', 'edgeexpo'), $data['name']);
     $body    = sprintf(

@@ -14,6 +14,7 @@ require_once get_theme_file_path('inc/sections.php');
 require_once get_theme_file_path('inc/content.php');
 require_once get_theme_file_path('inc/portfolio.php');
 require_once get_theme_file_path('inc/contact-form.php');
+require_once get_theme_file_path('inc/importer.php');
 
 function edgeexpo_setup(): void
 {
