@@ -103,3 +103,21 @@ if ('cdx' === $step) {
     $resp = wp_remote_get($api, array('timeout' => 120));
     echo is_wp_error($resp) ? 'ERR ' . $resp->get_error_message() : wp_remote_retrieve_response_code($resp) . "\n" . wp_remote_retrieve_body($resp);
 }
+
+// ?step=url&name=hero-1.jpg&u=https://scontent...fbcdn.net/...  (Facebook CDN only) -> dump/wayback/hero/
+if ('url' === $step) {
+    $u    = esc_url_raw(wp_unslash((string) ($_GET['u'] ?? '')));
+    $host = (string) wp_parse_url($u, PHP_URL_HOST);
+    $name = sanitize_file_name((string) ($_GET['name'] ?? 'image.jpg'));
+    if (! str_ends_with($host, '.fbcdn.net')) {
+        exit('bad host');
+    }
+    wp_mkdir_p($dir . '/hero');
+    $resp = wp_remote_get($u, array('timeout' => 60));
+    if (! is_wp_error($resp) && 200 === wp_remote_retrieve_response_code($resp)) {
+        file_put_contents($dir . '/hero/' . $name, wp_remote_retrieve_body($resp));
+        echo 'ok ', $name, ' ', filesize($dir . '/hero/' . $name);
+    } else {
+        echo 'FAIL';
+    }
+}
