@@ -3,7 +3,9 @@
   "slug": "barclays",
   "title": "Barclays",
   "event": "Custom Designed Point of Sale: The Maze Game",
-  "body": [],
+  "body": [
+   "A custom designed point of sale piece for Barclays: The Maze Game. The interactive maze is CNC cut and finished in a duco spray, mounted on a wooden table with a re-enforced steel bracket and a powder coated steel weighted base, so it stays stable and eye catching in a busy retail space."
+  ],
   "features": [
    "Powder Coated Steel Weighted Base",
    "Re-enforced Steel Bracket under wooden table",
@@ -290,13 +292,15 @@
  {
   "slug": "bonitas",
   "title": "Bonitas",
-  "event": "Bonitas Medical Fund",
+  "event": "Bonitas Comrades Marathon Expo, Durban",
   "body": [
-   "The Bonitas Comrades Marathon Expo is the largest running-related exhibition in South Africa. As the headline sponsor of the Comrades Marathon, and a fulltime advocate of healthy lifestyle, Bonitas thought it only right to support the greatest of all physical challenges. Their stands at the show were therefore focused on the health and well being of the runners and those that attended the exhibition. 16 Nurses were available on the Main Stand to test the blood pressure and BMI of the public, and the Physiotherapy stand had 11 Physiotherapists on site, giving the runners a pre-race check up, stretch and massage. Edge designed the stand with this space planning in mind. Optimizing the flow of the stand, allowing for entrances and exits, waiting areas, queuing areas, the working stations and the walkways between all of these spaces – as well as incorporating ample branding and making the stand …",
-   "[PLACEHOLDER – the rest of this text was cut off in the March 2025 test-site screenshot and is not in the Wayback Machine. Edge Expos to supply.]"
+   "The Bonitas Comrades Marathon Expo is the largest running-related exhibition in South Africa. As the headline sponsor of the Comrades Marathon, and a fulltime advocate of healthy lifestyle, Bonitas thought it only right to support the greatest of all physical challenges. Their stands at the show were therefore focused on the health and well being of the runners and those that attended the exhibition. 16 Nurses were available on the Main Stand to test the blood pressure and BMI of the public, and the Physiotherapy stand had 11 Physiotherapists on site, giving the runners a pre-race check up, stretch and massage. Edge designed the stand with this space planning in mind. Optimizing the flow of the stand, allowing for entrances and exits, waiting areas, queuing areas, the working stations and the walkways between all of these spaces. Ample branding was incorporated throughout the stand."
   ],
   "features": [
-   "[PLACEHOLDER – project features to be supplied]"
+   "Custom Exhibition Stand",
+   "Space Planning",
+   "Health Testing Stations",
+   "Physiotherapy Stand"
   ],
   "extra": null,
   "images": [],
@@ -305,17 +309,21 @@
    "custom"
   ],
   "date": "2024-12-20 09:00:00",
-  "placeholder": true
+  "placeholder": false,
+  "status": "draft"
  },
  {
   "slug": "imfuyo",
   "title": "Imfuyo",
-  "event": "[PLACEHOLDER – event and venue]",
+  "event": "Custom Exhibition Stand",
   "body": [
-   "[PLACEHOLDER – this project only appeared as a link on the March 2025 test site. Its text and photos were not archived. Edge Expos to supply.]"
+   "A custom exhibition stand for Imfuyo Air Products, with glass display cabinets for the product range, bold colour feature panels and a branded reception counter."
   ],
   "features": [
-   "[PLACEHOLDER – project features to be supplied]"
+   "Custom Exhibition Stand",
+   "Product Display Cabinets",
+   "Feature Wall Panels",
+   "Reception Counter"
   ],
   "extra": null,
   "images": [],
@@ -324,16 +332,20 @@
    "exhibition-stands"
   ],
   "date": "2024-12-19 09:00:00",
-  "placeholder": true
+  "placeholder": false
  },
  {
   "slug": "bbf-safety-group",
   "title": "BBF Safety Group",
-  "event": "[PLACEHOLDER – event and venue]",
-  "body": [],
+  "event": "Custom Exhibition Stand",
+  "body": [
+   "A custom exhibition stand for BBF Safety Group, with backlit shelving walls displaying the safety footwear range, a central branded tower, a lounge area and product plinths in the brand colours."
+  ],
   "features": [
    "Custom Exhibition Stand",
-   "[PLACEHOLDER] Add the other project features"
+   "Backlit Product Shelving",
+   "Branded Tower",
+   "Lounge Area"
   ],
   "extra": null,
   "images": [],
@@ -345,17 +357,21 @@
    "custom"
   ],
   "date": "2017-09-01 09:00:00",
-  "placeholder": true,
+  "placeholder": false,
   "found_fallback": "portfolio-bbf-safety-group.webp"
  },
  {
   "slug": "hurco",
   "title": "Hurco South Africa",
-  "event": "[PLACEHOLDER – event and venue]",
-  "body": [],
+  "event": "Custom Exhibition Stand",
+  "body": [
+   "A custom exhibition stand for Hurco South Africa, with a floating branded canopy edged in LED lighting, overhead screens, a feature graphic wall and space for live machinery demonstrations."
+  ],
   "features": [
    "Custom Exhibition Stand",
-   "[PLACEHOLDER] Add the other project features"
+   "Suspended Branded Canopy",
+   "LED Feature Lighting",
+   "Machinery Display"
   ],
   "extra": null,
   "images": [],
@@ -367,7 +383,73 @@
    "custom"
   ],
   "date": "2017-09-02 09:00:00",
-  "placeholder": true,
+  "placeholder": false,
   "found_fallback": "portfolio-hurco.webp"
+ },
+ {
+  "slug": "hyundai",
+  "title": "Hyundai Construction Equipment",
+  "event": "Outdoor Exhibition Stand",
+  "body": [
+   "An outdoor exhibition stand for Hyundai construction equipment, with tall branded totems, a shaded lounge area with timber walkways and the machines displayed around the stand."
+  ],
+  "features": [
+   "Outdoor Exhibition Stand",
+   "Branded Totems",
+   "Shaded Lounge Area",
+   "Machinery Display"
+  ],
+  "extra": null,
+  "images": [],
+  "thumb": null,
+  "categories": [
+   "custom"
+  ],
+  "date": "2016-03-01 09:00:00",
+  "placeholder": false
+ },
+ {
+  "slug": "qps",
+  "title": "QPS",
+  "event": "Custom Exhibition Stand",
+  "body": [
+   "A custom exhibition stand for QPS with engines on display, large format branded walls, a reception counter and a bar-height meeting area."
+  ],
+  "features": [
+   "Custom Exhibition Stand",
+   "Product Display",
+   "Large Format Graphics",
+   "Meeting Area"
+  ],
+  "extra": null,
+  "images": [],
+  "thumb": null,
+  "categories": [
+   "custom"
+  ],
+  "date": "2016-03-02 09:00:00",
+  "placeholder": false
+ },
+ {
+  "slug": "slp-south-africa",
+  "title": "SLP South Africa",
+  "event": "Custom Exhibition Stand",
+  "body": [
+   "A custom exhibition stand for SLP South Africa with large format product graphics, display plinths and a branded reception counter."
+  ],
+  "features": [
+   "Custom Exhibition Stand",
+   "Product Plinths",
+   "Large Format Graphics",
+   "Reception Counter"
+  ],
+  "extra": null,
+  "images": [],
+  "thumb": null,
+  "categories": [
+   "custom"
+  ],
+  "date": "2016-03-03 09:00:00",
+  "placeholder": false
  }
 ]

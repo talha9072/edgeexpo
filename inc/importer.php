@@ -134,6 +134,30 @@ function edgeexpo_run_import(string $step = 'all'): string
             return $id;
         };
 
+        // Download a photo from a full URL (e.g. the Facebook CDN) into the Media Library once.
+        $import_url = static function (string $url, string $name, string $title): int {
+            $name  = sanitize_title($name);
+            $found = get_posts(array('post_type' => 'attachment', 'name' => $name, 'posts_per_page' => 1, 'fields' => 'ids', 'post_status' => 'inherit'));
+            if ($found) {
+                return $found[0];
+            }
+            $resp = wp_remote_get($url, array('timeout' => 40));
+            if (is_wp_error($resp) || 200 !== wp_remote_retrieve_response_code($resp) || ! str_starts_with((string) wp_remote_retrieve_header($resp, 'content-type'), 'image/')) {
+                echo "  photo failed: {$name}\n";
+                return 0;
+            }
+            $upload = wp_upload_bits($name . '.jpg', null, wp_remote_retrieve_body($resp));
+            if (! empty($upload['error'])) {
+                echo '  upload error: ', $upload['error'], "\n";
+                return 0;
+            }
+            $id = wp_insert_attachment(array('post_mime_type' => 'image/jpeg', 'post_title' => $title, 'post_name' => $name, 'post_status' => 'inherit'), $upload['file']);
+            wp_update_attachment_metadata($id, wp_generate_attachment_metadata($id, $upload['file']));
+            update_post_meta($id, '_wp_attachment_image_alt', $title . ' exhibition stand by Edge Expos');
+            echo "  photo {$name}\n";
+            return $id;
+        };
+
         $esc_block = static fn (string $s): string => wp_kses_post($s);
         $p         = static fn (string $html, string $class = ''): string => $class
             ? "<!-- wp:paragraph {\"className\":\"{$class}\"} -->\n<p class=\"{$class}\">{$html}</p>\n<!-- /wp:paragraph -->"
@@ -147,8 +171,12 @@ function edgeexpo_run_import(string $step = 'all'): string
         };
 
         $projects = json_decode((string) file_get_contents(get_theme_file_path('inc/data/portfolio.json')), true);
+        $fbmap = (array) get_option('edgeexpo_fb_photos', array());
         foreach ($projects as $i => $project) {
             echo "project {$project['slug']}\n";
+            if (! empty($fbmap[$project['slug']])) {
+                $project['fb'] = $fbmap[$project['slug']];
+            }
 
             // Only the thumbnail photos survived in the archive; gallery photos were never captured.
             $images = array();
@@ -166,6 +194,27 @@ function edgeexpo_run_import(string $step = 'all'): string
                 }
             }
 
+            // Project photos from the Edge Expo Facebook album "Our Beautiful Stands - Portfolio".
+            // The archive photo stays as the square thumbnail; the gallery shows the album photos.
+            $fb_ids = array();
+            foreach ($project['fb'] ?? array() as $n => $fb_url) {
+                $fb_ids[] = $import_url($fb_url, 'portfolio-' . $project['slug'] . '-fb-' . ($n + 1), $project['title']);
+            }
+            $fb_ids  = array_values(array_filter($fb_ids));
+            $thumb   = $images[0] ?? ($fb_ids[0] ?? 0);
+            $gallery_ids = $fb_ids ? array_merge(array_slice($images, $project['thumb'] ? 1 : 0), $fb_ids) : $images;
+            if ($fb_ids && ! empty($project['found'])) {
+                // Keep renders found in the archive in the gallery as well.
+                $gallery_ids = array_values(array_unique(array_merge($fb_ids, array_slice($images, $project['thumb'] ? 1 : 0))));
+            }
+            $images_for_thumb = $thumb;
+            // At most 4 photos per project, spread across the set so the angles differ.
+            if (count($gallery_ids) > 4) {
+                $last        = count($gallery_ids) - 1;
+                $gallery_ids = array_values(array_unique(array_map(static fn ($k) => $gallery_ids[(int) round($k * $last / 3)], array(0, 1, 2, 3))));
+            }
+            $images = $gallery_ids;
+
             $gallery_inner = '';
             foreach ($images as $img) {
                 $url            = wp_get_attachment_image_url($img, 'large');
@@ -174,12 +223,10 @@ function edgeexpo_run_import(string $step = 'all'): string
             }
             $gallery = "<!-- wp:gallery {\"columns\":1,\"linkTo\":\"none\",\"sizeSlug\":\"large\",\"className\":\"is-style-ee-stacked\"} -->\n<figure class=\"wp-block-gallery has-nested-images columns-1 is-cropped is-style-ee-stacked\">{$gallery_inner}</figure>\n<!-- /wp:gallery -->";
 
-            $missing = count($project['images']) - count($images) + count($project['found'] ?? array());
+            $missing = $fb_ids ? 0 : count($project['images']) - count($images) + count($project['found'] ?? array());
             $note    = '';
             if (! $images) {
                 $note = $p('[PLACEHOLDER] Project photos were not saved by the Wayback Machine. Edge Expos to supply photos for this project.', 'ee-placeholder');
-            } elseif ($missing > 0) {
-                $note = $p(sprintf('[PLACEHOLDER] %d more photo%s from the old site were not archived. Edge Expos to supply.', $missing, 1 === $missing ? '' : 's'), 'ee-placeholder');
             }
 
             $info = "<!-- wp:post-title {\"level\":1,\"className\":\"ee-project__title\"} /-->\n\n"
@@ -207,7 +254,7 @@ function edgeexpo_run_import(string $step = 'all'): string
             $existing = get_page_by_path($project['slug'], OBJECT, EDGEEXPO_PORTFOLIO);
             $args     = array(
                 'post_type'    => EDGEEXPO_PORTFOLIO,
-                'post_status'  => 'publish',
+                'post_status'  => $project['status'] ?? 'publish',
                 'post_name'    => $project['slug'],
                 'post_title'   => $project['title'],
                 'post_date'    => $project['date'],
@@ -223,8 +270,8 @@ function edgeexpo_run_import(string $step = 'all'): string
                 echo '  ERROR ', $id->get_error_message(), "\n";
                 continue;
             }
-            if ($images) {
-                set_post_thumbnail($id, $images[0]);
+            if ($images_for_thumb) {
+                set_post_thumbnail($id, $images_for_thumb);
             }
             wp_set_object_terms($id, $project['categories'], EDGEEXPO_PORTFOLIO_TAX);
             echo '  ', get_permalink($id), ($images ? '' : ' (no photo)'), "\n";
@@ -254,6 +301,21 @@ function edgeexpo_setup_screen(): void
         $email = sanitize_email(wp_unslash($_POST['edgeexpo_test_email']));
         update_option('edgeexpo_contact_test_email', is_email($email) ? $email : '');
     }
+    if (isset($_POST['edgeexpo_fb_json']) && check_admin_referer('edgeexpo_fb')) {
+        $raw  = json_decode(wp_unslash((string) $_POST['edgeexpo_fb_json']), true);
+        $save = array();
+        foreach ((array) $raw as $slug => $urls) {
+            foreach ((array) $urls as $url) {
+                $url  = esc_url_raw((string) $url);
+                $host = (string) wp_parse_url($url, PHP_URL_HOST);
+                if ($url && str_starts_with($url, 'https://') && (str_ends_with($host, '.fbcdn.net') || str_ends_with($host, '.facebook.com'))) {
+                    $save[sanitize_title((string) $slug)][] = $url;
+                }
+            }
+        }
+        update_option('edgeexpo_fb_photos', $save, false);
+        echo '<div class="notice notice-success"><p>' . esc_html(sprintf('Saved Facebook photo list: %d projects, %d photos.', count($save), array_sum(array_map('count', $save)))) . '</p></div>';
+    }
     if (isset($_POST['edgeexpo_step']) && check_admin_referer('edgeexpo_setup')) {
         $step = sanitize_key(wp_unslash($_POST['edgeexpo_step']));
         if (in_array($step, array('all', 'pages', 'portfolio'), true)) {
@@ -270,6 +332,10 @@ function edgeexpo_setup_screen(): void
     echo '<p><button class="button button-primary" name="edgeexpo_step" value="all">' . esc_html__('Import pages and portfolio', 'edgeexpo') . '</button> ';
     echo '<button class="button" name="edgeexpo_step" value="pages">' . esc_html__('Pages only', 'edgeexpo') . '</button> ';
     echo '<button class="button" name="edgeexpo_step" value="portfolio">' . esc_html__('Portfolio only', 'edgeexpo') . '</button></p></form>';
+    echo '<h2>' . esc_html__('Facebook portfolio photos', 'edgeexpo') . '</h2>';
+    echo '<form method="post" id="ee-fb-form">';
+    wp_nonce_field('edgeexpo_fb');
+    echo '<p><textarea name="edgeexpo_fb_json" rows="3" class="large-text code" placeholder="{&quot;project-slug&quot;:[&quot;https://...fbcdn.net/...jpg&quot;]}"></textarea></p><p><button class="button">' . esc_html__('Save photo list', 'edgeexpo') . '</button> ' . esc_html(sprintf('%d projects saved. Run "Portfolio only" afterwards to download them.', count((array) get_option('edgeexpo_fb_photos', array())))) . '</p></form>';
     $test = (string) get_option('edgeexpo_contact_test_email', '');
     echo '<h2>' . esc_html__('Contact form recipients', 'edgeexpo') . '</h2>';
     echo '<p>' . ($test

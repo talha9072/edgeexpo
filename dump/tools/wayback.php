@@ -94,3 +94,12 @@ if ('one' === $step) {
         echo "FAIL\n";
     }
 }
+
+// ?step=cdx&url=edgeexpos.co.za&match=domain  -> raw CDX lines (original mimetype length timestamp)
+if ('cdx' === $step) {
+    $q    = sanitize_text_field(wp_unslash((string) ($_GET['url'] ?? '')));
+    $m    = sanitize_key((string) ($_GET['match'] ?? 'domain'));
+    $api  = 'https://web.archive.org/cdx/search/cdx?url=' . rawurlencode($q) . '&matchType=' . $m . '&fl=original,mimetype,length,timestamp,statuscode&collapse=urlkey&limit=5000';
+    $resp = wp_remote_get($api, array('timeout' => 120));
+    echo is_wp_error($resp) ? 'ERR ' . $resp->get_error_message() : wp_remote_retrieve_response_code($resp) . "\n" . wp_remote_retrieve_body($resp);
+}

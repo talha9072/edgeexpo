@@ -584,13 +584,32 @@ img {
 	text-transform: uppercase;
 }
 
-.wp-block-gallery.is-style-ee-stacked {
-	gap: 14px;
+/* Project gallery: first photo full width, the rest three to a row. */
+.wp-block-gallery.has-nested-images.is-style-ee-stacked {
+	gap: 12px;
 }
 
-.wp-block-gallery.is-style-ee-stacked .wp-block-image img {
+.wp-block-gallery.has-nested-images.is-style-ee-stacked figure.wp-block-image:not(#individual-image) {
+	width: calc((100% - 24px) / 3) !important;
+	margin: 0;
+}
+
+.wp-block-gallery.has-nested-images.is-style-ee-stacked figure.wp-block-image:first-child:not(#individual-image) {
+	width: 100% !important;
+}
+
+.wp-block-gallery.has-nested-images.is-style-ee-stacked figure.wp-block-image img {
 	width: 100%;
-	height: auto;
+	height: 100% !important;
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.wp-block-gallery.has-nested-images.is-style-ee-stacked figure.wp-block-image:first-child img {
+	aspect-ratio: 3 / 2;
+}
+
+.wp-block-gallery.has-nested-images.is-style-ee-stacked figure.wp-block-image:only-child img {
 	aspect-ratio: auto;
 	object-fit: contain;
 }

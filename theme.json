@@ -13,29 +13,103 @@
       "defaultGradients": false,
       "defaultDuotone": false,
       "palette": [
-        { "slug": "lime", "color": "#A0CE4E", "name": "Edge Green" },
-        { "slug": "lime-dark", "color": "#96C346", "name": "Edge Green Hover" },
-        { "slug": "ink", "color": "#333333", "name": "Ink" },
-        { "slug": "body", "color": "#747474", "name": "Body Text" },
-        { "slug": "topbar", "color": "#686868", "name": "Top Bar Grey" },
-        { "slug": "band", "color": "#EAEAEA", "name": "Contact Band Grey" },
-        { "slug": "titlebar", "color": "#F6F6F6", "name": "Title Bar Grey" },
-        { "slug": "rule", "color": "#E0DEDE", "name": "Rule" },
-        { "slug": "footer", "color": "#363839", "name": "Footer Charcoal" },
-        { "slug": "logo", "color": "#5D5E54", "name": "Logo Olive Grey" },
-        { "slug": "white", "color": "#FFFFFF", "name": "White" }
+        {
+          "slug": "lime",
+          "color": "#A0CE4E",
+          "name": "Edge Green"
+        },
+        {
+          "slug": "lime-dark",
+          "color": "#96C346",
+          "name": "Edge Green Hover"
+        },
+        {
+          "slug": "ink",
+          "color": "#333333",
+          "name": "Ink"
+        },
+        {
+          "slug": "body",
+          "color": "#747474",
+          "name": "Body Text"
+        },
+        {
+          "slug": "topbar",
+          "color": "#686868",
+          "name": "Top Bar Grey"
+        },
+        {
+          "slug": "band",
+          "color": "#EAEAEA",
+          "name": "Contact Band Grey"
+        },
+        {
+          "slug": "titlebar",
+          "color": "#F6F6F6",
+          "name": "Title Bar Grey"
+        },
+        {
+          "slug": "rule",
+          "color": "#E0DEDE",
+          "name": "Rule"
+        },
+        {
+          "slug": "footer",
+          "color": "#363839",
+          "name": "Footer Charcoal"
+        },
+        {
+          "slug": "logo",
+          "color": "#5D5E54",
+          "name": "Logo Olive Grey"
+        },
+        {
+          "slug": "white",
+          "color": "#FFFFFF",
+          "name": "White"
+        }
       ]
     },
     "spacing": {
       "defaultSpacingSizes": false,
-      "units": ["px", "rem", "%", "vh", "vw"],
+      "units": [
+        "px",
+        "rem",
+        "%",
+        "vh",
+        "vw"
+      ],
       "spacingSizes": [
-        { "slug": "xs", "size": "8px", "name": "XS · 8" },
-        { "slug": "sm", "size": "16px", "name": "SM · 16" },
-        { "slug": "md", "size": "30px", "name": "MD · 30" },
-        { "slug": "lg", "size": "40px", "name": "LG · 40" },
-        { "slug": "xl", "size": "60px", "name": "XL · 60" },
-        { "slug": "section", "size": "clamp(2.5rem, 1.5rem + 4vw, 3.75rem)", "name": "Section · 40–60" }
+        {
+          "slug": "xs",
+          "size": "8px",
+          "name": "XS · 8"
+        },
+        {
+          "slug": "sm",
+          "size": "16px",
+          "name": "SM · 16"
+        },
+        {
+          "slug": "md",
+          "size": "30px",
+          "name": "MD · 30"
+        },
+        {
+          "slug": "lg",
+          "size": "40px",
+          "name": "LG · 40"
+        },
+        {
+          "slug": "xl",
+          "size": "60px",
+          "name": "XL · 60"
+        },
+        {
+          "slug": "section",
+          "size": "clamp(2.5rem, 1.5rem + 4vw, 3.75rem)",
+          "name": "Section · 40–60"
+        }
       ]
     },
     "typography": {
@@ -55,7 +129,9 @@
               "fontStyle": "normal",
               "fontWeight": "300 800",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/open-sans-latin-variable.woff2"]
+              "src": [
+                "file:./assets/fonts/open-sans-latin-variable.woff2"
+              ]
             }
           ]
         },
@@ -64,9 +140,33 @@
           "name": "Roboto",
           "fontFamily": "Roboto, Arial, Helvetica, sans-serif",
           "fontFace": [
-            { "fontFamily": "Roboto", "fontStyle": "normal", "fontWeight": "300", "fontDisplay": "swap", "src": ["file:./assets/fonts/roboto-latin-300.woff2"] },
-            { "fontFamily": "Roboto", "fontStyle": "normal", "fontWeight": "400", "fontDisplay": "swap", "src": ["file:./assets/fonts/roboto-latin-400.woff2"] },
-            { "fontFamily": "Roboto", "fontStyle": "normal", "fontWeight": "500", "fontDisplay": "swap", "src": ["file:./assets/fonts/roboto-latin-500.woff2"] }
+            {
+              "fontFamily": "Roboto",
+              "fontStyle": "normal",
+              "fontWeight": "300",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/roboto-latin-300.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/roboto-latin-400.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Roboto",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/roboto-latin-500.woff2"
+              ]
+            }
           ]
         },
         {
@@ -74,22 +174,79 @@
           "name": "PT Sans",
           "fontFamily": "\"PT Sans\", Arial, Helvetica, sans-serif",
           "fontFace": [
-            { "fontFamily": "PT Sans", "fontStyle": "normal", "fontWeight": "700", "fontDisplay": "swap", "src": ["file:./assets/fonts/pt-sans-latin-700.woff2"] }
+            {
+              "fontFamily": "PT Sans",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/pt-sans-latin-700.woff2"
+              ]
+            }
           ]
         }
       ],
       "fontSizes": [
-        { "slug": "label", "size": "12px", "name": "Label · 12", "fluid": false },
-        { "slug": "small", "size": "13px", "name": "Small · 13", "fluid": false },
-        { "slug": "body", "size": "14px", "name": "Body · 14", "fluid": false },
-        { "slug": "nav", "size": "15px", "name": "Navigation · 15", "fluid": false },
-        { "slug": "heading-3", "size": "15px", "name": "H3 · 15", "fluid": false },
-        { "slug": "heading-2", "size": "32px", "name": "H2 · 24–32", "fluid": { "min": "24px", "max": "32px" } },
-        { "slug": "heading-1", "size": "34px", "name": "H1 · 28–34", "fluid": { "min": "28px", "max": "34px" } }
+        {
+          "slug": "label",
+          "size": "12px",
+          "name": "Label · 12",
+          "fluid": false
+        },
+        {
+          "slug": "small",
+          "size": "13px",
+          "name": "Small · 13",
+          "fluid": false
+        },
+        {
+          "slug": "body",
+          "size": "14px",
+          "name": "Body · 14",
+          "fluid": false
+        },
+        {
+          "slug": "nav",
+          "size": "15px",
+          "name": "Navigation · 15",
+          "fluid": false
+        },
+        {
+          "slug": "heading-3",
+          "size": "15px",
+          "name": "H3 · 15",
+          "fluid": false
+        },
+        {
+          "slug": "heading-2",
+          "size": "32px",
+          "name": "H2 · 24–32",
+          "fluid": {
+            "min": "24px",
+            "max": "32px"
+          }
+        },
+        {
+          "slug": "heading-1",
+          "size": "34px",
+          "name": "H1 · 28–34",
+          "fluid": {
+            "min": "28px",
+            "max": "34px"
+          }
+        }
       ]
     },
     "custom": {
       "transition": "0.25s ease"
+    },
+    "blocks": {
+      "core/image": {
+        "lightbox": {
+          "enabled": true,
+          "allowEditing": true
+        }
+      }
     }
   },
   "styles": {
@@ -99,7 +256,10 @@
     },
     "spacing": {
       "blockGap": "0px",
-      "padding": { "left": "0px", "right": "0px" }
+      "padding": {
+        "left": "0px",
+        "right": "0px"
+      }
     },
     "typography": {
       "fontFamily": "var:preset|font-family|roboto",
@@ -109,33 +269,109 @@
     },
     "elements": {
       "heading": {
-        "color": { "text": "var:preset|color|ink" },
-        "typography": { "fontFamily": "var:preset|font-family|open-sans", "fontWeight": "400" }
+        "color": {
+          "text": "var:preset|color|ink"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|open-sans",
+          "fontWeight": "400"
+        }
       },
-      "h1": { "typography": { "fontSize": "var:preset|font-size|heading-1", "lineHeight": "1.25" } },
-      "h2": { "typography": { "fontSize": "var:preset|font-size|heading-2", "lineHeight": "1.3" } },
-      "h3": { "typography": { "fontSize": "var:preset|font-size|heading-3", "lineHeight": "1.4" } },
+      "h1": {
+        "typography": {
+          "fontSize": "var:preset|font-size|heading-1",
+          "lineHeight": "1.25"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "var:preset|font-size|heading-2",
+          "lineHeight": "1.3"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "var:preset|font-size|heading-3",
+          "lineHeight": "1.4"
+        }
+      },
       "link": {
-        "color": { "text": "var:preset|color|ink" },
-        "typography": { "textDecoration": "none" },
-        ":hover": { "color": { "text": "var:preset|color|lime" } },
-        ":focus": { "color": { "text": "var:preset|color|lime" } }
+        "color": {
+          "text": "var:preset|color|ink"
+        },
+        "typography": {
+          "textDecoration": "none"
+        },
+        ":hover": {
+          "color": {
+            "text": "var:preset|color|lime"
+          }
+        },
+        ":focus": {
+          "color": {
+            "text": "var:preset|color|lime"
+          }
+        }
       },
       "button": {
-        "color": { "background": "var:preset|color|lime", "text": "var:preset|color|white" },
-        "border": { "radius": "2px", "width": "0px" },
-        "spacing": { "padding": { "top": "13px", "right": "29px", "bottom": "13px", "left": "29px" } },
-        "typography": { "fontFamily": "var:preset|font-family|pt-sans", "fontSize": "14px", "fontWeight": "700", "lineHeight": "17px", "letterSpacing": "0px", "textTransform": "uppercase" },
-        ":hover": { "color": { "background": "var:preset|color|lime-dark", "text": "var:preset|color|white" } },
-        ":focus": { "color": { "background": "var:preset|color|lime-dark", "text": "var:preset|color|white" } }
+        "color": {
+          "background": "var:preset|color|lime",
+          "text": "var:preset|color|white"
+        },
+        "border": {
+          "radius": "2px",
+          "width": "0px"
+        },
+        "spacing": {
+          "padding": {
+            "top": "13px",
+            "right": "29px",
+            "bottom": "13px",
+            "left": "29px"
+          }
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|pt-sans",
+          "fontSize": "14px",
+          "fontWeight": "700",
+          "lineHeight": "17px",
+          "letterSpacing": "0px",
+          "textTransform": "uppercase"
+        },
+        ":hover": {
+          "color": {
+            "background": "var:preset|color|lime-dark",
+            "text": "var:preset|color|white"
+          }
+        },
+        ":focus": {
+          "color": {
+            "background": "var:preset|color|lime-dark",
+            "text": "var:preset|color|white"
+          }
+        }
       }
     }
   },
   "templateParts": [
-    { "name": "header", "title": "Header", "area": "header" },
-    { "name": "footer", "title": "Footer", "area": "footer" }
+    {
+      "name": "header",
+      "title": "Header",
+      "area": "header"
+    },
+    {
+      "name": "footer",
+      "title": "Footer",
+      "area": "footer"
+    }
   ],
   "customTemplates": [
-    { "name": "page-thank-you", "title": "Thank You", "postTypes": ["page"] }
+    {
+      "name": "page-thank-you",
+      "title": "Thank You",
+      "postTypes": [
+        "page"
+      ]
+    }
   ]
 }
