@@ -71,7 +71,7 @@ function edgeexpo_page_content(string $key): array
                 array('bolt', 'Tool Free Solution', 'This Modular Exhibition system is a tool free solution, meaning that the end user can build the stand quickly and easily. Due to the fact that the product is sold out-right and not on a hire basis as is typical with most exhibition stands, it is a brilliant long-term cost saving solution.'),
                 array('eye', 'Maximum Branding Opportunity', 'Last but not least, the Modular Exhibition Stand is beautiful. A seamless fabric print gives the stand the illusion of a custom exhibition stand, with the additional value of maximizing your branding opportunities.'),
             ),
-            'button'  => array('Click here to view our modular catalogue', '#modular-catalogue-placeholder'),
+            'button'  => array('Request our modular catalogue', home_url('/contact-us/')),
             'cta'     => array('Discover endless possibilities', 'The Modular Exhibition Stand offers you endless configurations to maximise your brand potential. Contact us today to find out more about this versatile solution.'),
         ),
         'system'    => array(
